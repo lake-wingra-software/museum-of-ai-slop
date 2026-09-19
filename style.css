@@ -1,0 +1,462 @@
+/* The Museum of AI Slop — retro terminal / brutalist theme.
+   Monospace, hard edges, neon on black. No rounded corners, no blur. */
+
+:root {
+  --wall: #050506;
+  --panel: #0b0b0d;
+  --ink: #d8d5cc;
+  --ink-dim: #8f8c83;
+  --ink-faint: #565550;
+  --line: #26262b;
+  --accent: #9aff9a;
+  --mono: "SFMono-Regular", "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  /* Native render width of the widest image. Cap the page here so the
+     full-bleed featured plate is shown 1:1 and never upscaled/blurry. */
+  --maxw: 768px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--wall);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Shimmering TV-static grain — the hum you can see. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Harsh CRT scanlines that buzz, plus a vignette closing in. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background:
+    radial-gradient(125% 115% at 50% 42%, transparent 52%, rgba(0, 0, 0, 0.62) 100%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.4) 3px,
+      rgba(0, 0, 0, 0) 4px
+    );
+}
+
+a { color: var(--accent); }
+
+::selection { background: var(--accent); color: #000; }
+
+.kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ---------- Home ---------- */
+
+.home {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(40px, 9vh, 120px) 20px 70px;
+}
+
+.hero { text-align: center; }
+
+.hero h1 {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 8vw, 4.6rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 24px 0;
+  color: var(--ink);
+  /* Chromatic-aberration split: the sign is slightly out of registration. */
+  text-shadow:
+    -2px 0 rgba(255, 0, 92, 0.55),
+    2px 0 rgba(0, 224, 255, 0.55),
+    0 0 22px rgba(216, 213, 204, 0.4);
+}
+
+.lede {
+  max-width: 600px;
+  margin: 0 auto 34px;
+  color: var(--ink-dim);
+  text-align: left;
+}
+
+.enter {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 12px 26px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  transition: none;
+}
+
+.enter:hover { background: var(--ink); color: var(--wall); }
+
+.map-section {
+  margin: 72px 0 56px;
+  text-align: left;
+}
+
+.map {
+  position: relative;
+  margin: 16px 0 12px;
+  border: 1px solid var(--line);
+  background: #000;
+}
+
+.map img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Classic map marker — a dot you can't quite trust the position of. */
+.you-are-here {
+  position: absolute;
+  left: 45%;
+  top: 88%;
+  transform: translate(calc(-50% + 64px), calc(-50% + 10px));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 9px;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.82);
+  border: 1px solid #fff;
+}
+
+.yah-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ff2f2f;
+  box-shadow: 0 0 0 4px rgba(255, 47, 47, 0.35);
+}
+
+.wings {
+  margin: 72px 0 56px;
+  border: 1px solid var(--line);
+  padding: 24px 22px 26px;
+  background: var(--panel);
+  text-align: left;
+}
+
+/* Wing chooser on the main page — the two wings are clickable from here. */
+.halls {
+  margin: 64px 0 56px;
+  text-align: left;
+}
+
+.hall {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  margin-top: 16px;
+  padding: 22px 24px;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ink-dim);
+}
+
+.hall:hover {
+  border-left-color: var(--ink);
+  background: #14141a;
+}
+
+.hall-thumb {
+  flex: none;
+  width: 104px;
+  height: 104px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.hall-text { display: block; min-width: 0; }
+
+.hall-name {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hall-blurb {
+  display: block;
+  margin: 8px 0 14px;
+  color: var(--ink-dim);
+  font-size: 0.92rem;
+}
+
+.hall-count {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* On a wing's own home page the hero sits under the sticky bar. */
+.wing-home { padding-top: clamp(36px, 6vh, 72px); }
+
+.wings-head {
+  color: var(--ink-faint);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+
+.exhibit-list { list-style: none; }
+
+.exhibit-row {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  grid-template-areas:
+    "no name"
+    "no tag";
+  column-gap: 18px;
+  padding: 14px 0 14px 16px;
+  border-top: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  margin-bottom: 2px;
+}
+.exhibit-row:first-child { border-top: none; }
+
+.exhibit-no {
+  grid-area: no;
+  align-self: center;
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.exhibit-name {
+  grid-area: name;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.exhibit-tag { grid-area: tag; color: var(--ink-dim); font-size: 0.9rem; }
+
+.wings-note {
+  margin-top: 20px;
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.enter-again {
+  text-align: center;
+  margin: 0 0 64px;
+}
+
+/* Ring nav between wings — next from the last loops to the first. */
+.wing-switch {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* At the top of the page the divider reads better below the nav. */
+.wing-switch--top {
+  border-top: none;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(24px, 5vh, 48px);
+}
+
+.wing-switch a { color: var(--ink-dim); text-decoration: none; }
+.wing-switch a:hover { color: var(--ink); }
+.switch-next { text-align: right; }
+
+.colophon {
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 0.78rem;
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+}
+
+/* ---------- Exhibit ---------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 200; /* above the framed art (101) and the scanline overlay (100) */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: var(--wall);
+  border-bottom: 1px solid var(--accent);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lobby-link { color: var(--ink-dim); text-decoration: none; }
+.lobby-link:hover { color: var(--accent); }
+.crumb { color: var(--accent); }
+
+.exhibit {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+
+.exhibit-header {
+  text-align: center;
+  padding: clamp(44px, 8vh, 84px) 0 clamp(30px, 5vh, 52px);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 46px;
+}
+
+.exhibit-header h1 {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 14px 0 18px;
+  color: var(--accent);
+  text-shadow:
+    -2px 0 rgba(255, 0, 92, 0.5),
+    2px 0 rgba(0, 224, 255, 0.5),
+    0 0 26px var(--accent),
+    0 0 6px var(--accent);
+}
+
+.exhibit-header .kicker { color: var(--accent); }
+
+.exhibit-blurb {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--ink-dim);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(26px, 4vw, 48px);
+}
+
+@media (min-width: 720px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  /* Featured pieces span the row; capped to native width (inline) and centred
+     so a small image is never upscaled to fill the line. */
+  .gallery .plate--feature { grid-column: 1 / -1; margin-inline: auto; }
+}
+
+.plate { display: flex; flex-direction: column; }
+
+.frame {
+  position: relative;
+  z-index: 101; /* sit above the CRT scanline overlay so lines miss the art */
+  width: 100%;
+  padding: 8px;
+  background: #000;
+  border: 1px solid var(--accent);
+}
+
+.frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Placard: dark neon label, not white paper. */
+.placard {
+  margin-top: -1px;
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-top: none;
+}
+
+.plate-title {
+  display: block;
+  font-weight: 700;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+.plate-meta {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* End-of-wing doorway */
+
+.doorway {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 70px auto 20px;
+  max-width: 520px;
+  padding: 24px 26px;
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+}
+
+.doorway:hover { background: var(--accent); color: var(--wall); }
+.doorway:hover .doorway-arrow { color: var(--wall); }
+
+.doorway-arrow { color: var(--accent); }
+
+@media (max-width: 520px) {
+  .doorway { font-size: 0.95rem; }
+  .exhibit-row { grid-template-columns: 64px 1fr; }
+}
