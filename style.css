@@ -10,6 +10,8 @@
   --line: #26262b;
   --accent: #9aff9a;
   --mono: "SFMono-Regular", "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  /* The curator's voice — serif, against the terminal's monospace. */
+  --serif: "Hoefler Text", "Baskerville", "Times New Roman", Georgia, serif;
   /* Native render width of the widest image. Cap the page here so the
      full-bleed featured plate is shown 1:1 and never upscaled/blurry. */
   --maxw: 768px;
@@ -265,8 +267,13 @@ a { color: var(--accent); }
   border-top: 1px solid var(--line);
   border-left: 3px solid var(--accent);
   margin-bottom: 2px;
+  text-decoration: none;
+  color: inherit;
+  transition: none;
 }
-.exhibit-row:first-child { border-top: none; }
+.exhibit-list li:first-child .exhibit-row { border-top: none; }
+.exhibit-row:hover { background: #14141a; padding-left: 22px; }
+.exhibit-row:hover .exhibit-name { color: var(--accent); }
 
 .exhibit-no {
   grid-area: no;
@@ -352,6 +359,27 @@ a { color: var(--accent); }
 .lobby-link:hover { color: var(--accent); }
 .crumb { color: var(--accent); }
 
+/* Wayfinding: which gallery you are in, and how far through the wing. */
+.wayfind {
+  position: relative;
+  z-index: 150; /* above the scanline overlay and vignette, below the topbar */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 20px;
+  background: #080809;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.pips { display: inline-flex; gap: 5px; align-items: center; }
+.pip { width: 18px; height: 3px; background: var(--line); }
+.pip.on { background: var(--accent); }
+.where { margin-left: auto; }
+
 .exhibit {
   max-width: var(--maxw);
   margin: 0 auto;
@@ -383,9 +411,17 @@ a { color: var(--accent); }
 .exhibit-header .kicker { color: var(--accent); }
 
 .exhibit-blurb {
-  max-width: 620px;
+  position: relative;
+  z-index: 2; /* lift above the CRT scanline overlay so lines don't cross the text */
+  max-width: 600px;
   margin: 0 auto;
-  color: var(--ink-dim);
+  text-align: left;
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 16px;
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: var(--ink);
 }
 
 .gallery {
@@ -427,6 +463,16 @@ a { color: var(--accent); }
   border-top: none;
 }
 
+/* Accession number — the registrar's hand, above the title. */
+.plate-cat {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
 .plate-title {
   display: block;
   font-weight: 700;
@@ -435,11 +481,21 @@ a { color: var(--accent); }
   color: var(--accent);
 }
 
+/* Medium line — deadpan registrar copy, so kept readable, not shouted. */
 .plate-meta {
   display: block;
   margin-top: 5px;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+/* Guided-tour wayfinding: which stop this gallery is on the walk. */
+.tour-stop {
+  text-align: center;
+  margin: 70px auto 12px;
   font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
@@ -451,7 +507,7 @@ a { color: var(--accent); }
   align-items: center;
   justify-content: center;
   gap: 14px;
-  margin: 70px auto 20px;
+  margin: 0 auto 20px;
   max-width: 520px;
   padding: 24px 26px;
   text-decoration: none;
