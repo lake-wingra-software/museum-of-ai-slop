@@ -178,7 +178,7 @@ a { color: var(--accent); }
   box-shadow: 0 0 0 4px rgba(255, 47, 47, 0.35);
 }
 
-.wings {
+.exhibits {
   margin: 72px 0 56px;
   border: 1px solid var(--line);
   padding: 24px 22px 26px;
@@ -186,13 +186,13 @@ a { color: var(--accent); }
   text-align: left;
 }
 
-/* Wing chooser on the main page — the two wings are clickable from here. */
-.halls {
+/* Wing chooser on the main page — every wing is clickable from here. */
+.wing-cards {
   margin: 64px 0 56px;
   text-align: left;
 }
 
-.hall {
+.wing-card {
   display: flex;
   gap: 22px;
   align-items: center;
@@ -205,12 +205,12 @@ a { color: var(--accent); }
   border-left: 3px solid var(--ink-dim);
 }
 
-.hall:hover {
+.wing-card:hover {
   border-left-color: var(--ink);
   background: #14141a;
 }
 
-.hall-thumb {
+.wing-card-thumb {
   flex: none;
   width: 104px;
   height: 104px;
@@ -219,9 +219,9 @@ a { color: var(--accent); }
   filter: saturate(1.05) contrast(1.02);
 }
 
-.hall-text { display: block; min-width: 0; }
+.wing-card-text { display: block; min-width: 0; }
 
-.hall-name {
+.wing-card-name {
   display: block;
   font-size: 1.5rem;
   font-weight: 700;
@@ -229,14 +229,14 @@ a { color: var(--accent); }
   text-transform: uppercase;
 }
 
-.hall-blurb {
+.wing-card-blurb {
   display: block;
   margin: 8px 0 14px;
   color: var(--ink-dim);
   font-size: 0.92rem;
 }
 
-.hall-count {
+.wing-card-count {
   display: block;
   font-size: 0.72rem;
   letter-spacing: 0.2em;
